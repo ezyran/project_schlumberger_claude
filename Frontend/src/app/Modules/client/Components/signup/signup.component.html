@@ -1,1 +1,59 @@
-<p>signup works!</p>
+<form [formGroup]="signUpForm">
+
+    <div>
+        <label class="form-label">Prénom</label>
+        <input type="text" formControlName="name">
+    </div>
+
+    <div>
+        <label class="form-label">Nom</label>
+        <input type="text" formControlName="surname">
+    </div>
+
+    <div>
+        <label class="form-label">Adresse e-mail</label>
+        <input type="email" formControlName="email">
+    </div>
+
+    <div>
+        <label class="form-label">Téléphone</label>
+        <input type="text" formControlName="telephone">
+    </div>
+
+    <div>
+        <label class="form-label">Pays</label>
+        <input type="text" formControlName="country">
+    </div>
+
+    <div>
+        <label class="form-label">Ville</label>
+        <input type="text" formControlName="city">
+    </div>
+
+    <div>
+        <label class="form-label">Code postal</label>
+        <input type="text" formControlName="zipcode">
+    </div>
+
+    <div>
+        <label class="form-label">Adresse</label>
+        <input type="text" formControlName="address">
+    </div>
+
+    <div>
+        <label class="form-label">Nom d'utilisateur</label>
+        <input type="text" formControlName="username">
+    </div>
+
+    <div>
+        <label class="form-label">Mot de passe</label>
+        <input type="text" formControlName="password">
+    </div>
+
+    <div>
+        <label class="form-label">Confirmation du mot de passe</label>
+        <input type="text" formControlName="passwordConf">
+    </div>
+
+    <button class="btn btn-primary" (click)="OnFormValidation()">Valider</button>
+</form>
