@@ -18,6 +18,10 @@ const appRoutes: Routes = [
     path: 'client',
     loadChildren: () => import('src/app/Modules/client/client.module').then((m) => m.ClientModule)
   },
+  {
+    path: 'product',
+    loadChildren: () => import('src/app/Modules/product/product.module').then((m) => m.ProductModule)
+  }
 ];
 
 @NgModule({
