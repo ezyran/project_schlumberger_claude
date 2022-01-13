@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-=======
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
->>>>>>> a92939cd09e3b0dd3fa2dd69dc02eee754877726
 RewriteRule ^ index.php [QSA,L]
