@@ -1,4 +1,2 @@
-db-dev.dockerfile
-docker-compose.yaml
-init-composer.sh
-php-dev.dockerfile
+postgres_data/
+mysql_data/
