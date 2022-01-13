@@ -3564,6 +3564,7 @@
             "support": {
                 "issues": "https://github.com/tuupola/slim-jwt-auth/issues",
                 "source": "https://github.com/tuupola/slim-jwt-auth/tree/3.6.0"
+
             },
             "funding": [
                 {
