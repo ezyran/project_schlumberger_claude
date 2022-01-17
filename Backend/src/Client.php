@@ -57,7 +57,7 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="zipcode", type="string", length=5, nullable=false)
+     * @ORM\Column(name="zipcode", type="string", length=10, nullable=false)
      */
     private $zipcode;
 

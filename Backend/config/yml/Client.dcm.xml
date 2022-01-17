@@ -34,7 +34,7 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="zipcode" type="string" column="zipcode" length="5" nullable="false">
+    <field name="zipcode" type="string" column="zipcode" length="10" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
