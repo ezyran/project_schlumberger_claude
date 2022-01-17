@@ -3,34 +3,16 @@ version: "3.1"
 services:
 
   php-dev:
-    container_name: web_php
-    image: php-dev:latest
+    container_name: web_srv
+    build: 
+      context: .
+      dockerfile: apache-srv.dockerfile
     restart: always
     ports:
       - 8080:80
     volumes:
       - ./Backend:/var/www/html
 
-  postgres-db:
-    image: postgres:latest
-    restart: always
-    ports:
-    - 5432:5432
-    volumes:
-      - ./postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: blopblop
-
-  mysql-db:
-    image: mysql:latest
-    restart: always
-    ports:
-    - 3306:3306
-    volumes:
-      - ./mysql_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: blopblop
-    
   adminer:
     container_name: web_adminer
     image: adminer:latest
