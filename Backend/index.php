@@ -2,6 +2,8 @@
 
 use Application\Controllers\AccountController;
 use Application\Controllers\ClientController;
+use Application\Controllers\ProductController;
+
 use Slim\Factory\AppFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -12,6 +14,7 @@ use Doctrine\ORM\EntityManager;
 require './controllers/JwtHandler.php';
 require './controllers/AccountController.php';
 require './controllers/ClientController.php';
+require './controllers/ProductController.php';
 require_once "bootstrap.php";
 
 function Add_CORS_Headers($response) {
@@ -35,7 +38,7 @@ $app->add(new JwtAuthentication([
     "algorithm" => ["HS512"],
 
     "path" => ["/api"],
-    "ignore" => ["/api/signin", "/api/signup"],
+    "ignore" => ["/api/signin", "/api/signup", "/api/product", "/api/product-list"],
     "error" => function ($response, $arguments) {
         $data = array('ERREUR' => 'Connexion', 'ERREUR' => 'JWT Non valide');
         $response = $response->withStatus(401);
@@ -144,6 +147,96 @@ $app->post('/api/signup', function (Request $request, Response $response, $args)
     $response = $response->withHeader("Content-Type", "application/json");
     $response->getBody()->write(json_encode(array("msg" => "Creation successful")));
     return $response;
+});
+
+$app->get('/api/client/{id}', function (Request $request, Response $response, $args) {
+    global $entityManager;
+
+    if (!array_key_exists("id", $args) || trim($args["id"]) == "")
+    {
+        $response = $response->withStatus(400);
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode(array("msg" => "Arguments invalides.")));
+        return $response;
+    }
+
+    $id = trim($args["id"]);
+
+    // Lecture client
+    $clientController = ClientController::GetClientController($entityManager);
+    $clientLectureRes = $clientController->GetClient(array("id" => $id));
+
+    if ($clientLectureRes["status"] == "error")
+    {
+        $response = $response->withStatus(400);
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode(array("msg" => $clientLectureRes["msg"])));
+        return $response;
+    }
+    $client = $clientLectureRes["msg"];
+    $client_array = array(
+        "name" => $client->getName(),
+        "surname" => $client->getSurname(),
+        "phoneNumber" => $client->getPhonenumber(),
+        "streetNumber" => $client->getStreetnumber(),
+        "streetName" => $client->getStreetName(),
+        "city" => $client->getCity(),
+        "zipcode" => $client->getZipcode()
+    );
+
+    Add_CORS_Headers($response);
+    $response = $response->withStatus(200);
+    $response = $response->withHeader("Content-Type", "application/json");
+    $response->getBody()->write(json_encode(array("client" => $client_array)));
+    return $response;
+});
+
+$app->get('/api/product/{id}', function (Request $request, Response $response, $args) {
+    global $entityManager;
+
+    $id = trim($args["id"]);
+
+    // Lecture produit
+    $productController = ProductController::GetProductController($entityManager);
+    $productLectureRes = $productController->GetProduct(array("id" => $id));
+
+    if ($productLectureRes["status"] == "error")
+    {
+        $response = $response->withStatus(400);
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode(array("msg" => $productLectureRes["msg"])));
+        return $response;
+    }
+    $product = $productLectureRes["msg"];
+
+    Add_CORS_Headers($response);
+    $response = $response->withStatus(200);
+    $response = $response->withHeader("Content-Type", "application/json");
+    $response->getBody()->write(json_encode(array("product" => $product)));
+    return $response; 
+});
+
+$app->get('/api/product-list', function (Request $request, Response $response, $args) {
+    global $entityManager;
+
+    // Lecture liste de produits
+    $productController = ProductController::GetProductController($entityManager);
+    $productLectureRes = $productController->ListProducts(array());
+
+    if ($productLectureRes["status"] == "error")
+    {
+        $response = $response->withStatus(400);
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode(array("msg" => $productLectureRes["msg"])));
+        return $response;
+    }
+    $products = $productLectureRes["msg"];
+
+    Add_CORS_Headers($response);
+    $response = $response->withStatus(200);
+    $response = $response->withHeader("Content-Type", "application/json");
+    $response->getBody()->write(json_encode(array("products" => $products)));
+    return $response; 
 });
 
 // Run app
