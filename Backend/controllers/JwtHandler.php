@@ -1,5 +1,7 @@
 <?php
 use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
+
 
 const JWT_Key = "jaimelesharicots";
 
@@ -22,3 +24,8 @@ function Get_Encoded_JWT_Token(Account $pAccount)
     return $jwt_token;
 }
 
+function Decode_JWT_Token($token)
+{
+    $decoded = JWT::decode($token, new Key($key, 'HS512'));
+    return (array) $decoded;
+}
