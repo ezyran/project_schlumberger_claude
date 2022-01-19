@@ -85,6 +85,7 @@ class AccountController
         return array(
             "id" => $pAccount->getId(),
             "email" => $pAccount->getEmail(),
+            "clientId" => $pAccount->getClient()->getId(),
             "client" => ClientController::ClientToArray($pAccount->getClient())
         );
     }

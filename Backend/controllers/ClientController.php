@@ -122,6 +122,7 @@ class ClientController
     public static function ClientToArray(Client $pClient)
     {
         return array(
+            "id" => $pClient->getId(),
             "name" => $pClient->getName(),
             "surname" => $pClient->getSurname(),
             "phoneNumber" => $pClient->getPhonenumber(),

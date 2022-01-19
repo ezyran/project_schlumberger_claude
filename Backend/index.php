@@ -61,7 +61,7 @@ $app->post('/api/signin', function (Request $request, Response $response, $args)
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => "Arguments invalides.")));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;                                                                                                                                                                       
     }
 
@@ -73,7 +73,7 @@ $app->post('/api/signin', function (Request $request, Response $response, $args)
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => "Arguments invalides.")));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
 
@@ -87,7 +87,7 @@ $app->post('/api/signin', function (Request $request, Response $response, $args)
         $response = $response->withStatus(401);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => $res["msg"])));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
     $account = AccountController::AccountToArray($res["msg"]);
@@ -98,7 +98,7 @@ $app->post('/api/signin', function (Request $request, Response $response, $args)
 
     $response = $response->withHeader("Content-Type", "application/json");
     $response->getBody()->write(json_encode($account));
-    Add_CORS_Headers($response);
+    $response = Add_CORS_Headers($response);
     return $response;
 });
 
@@ -118,7 +118,7 @@ $app->post('/api/signup', function (Request $request, Response $response, $args)
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => "Arguments invalides.")));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
 
@@ -131,7 +131,7 @@ $app->post('/api/signup', function (Request $request, Response $response, $args)
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => $clientCreationRes["msg"])));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
     
@@ -149,14 +149,14 @@ $app->post('/api/signup', function (Request $request, Response $response, $args)
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => $accountCreationRes["msg"])));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
 
     $response = $response->withStatus(200);
     $response = $response->withHeader("Content-Type", "application/json");
     $response->getBody()->write(json_encode(array("msg" => "Creation successful")));
-    Add_CORS_Headers($response);
+    $response = Add_CORS_Headers($response);
     return $response;
 });
 
@@ -171,7 +171,7 @@ $app->get('/api/client/{id}', function (Request $request, Response $response, $a
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => "Arguments invalides.")));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
 
@@ -186,7 +186,7 @@ $app->get('/api/client/{id}', function (Request $request, Response $response, $a
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => $clientLectureRes["msg"])));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
     $client = ClientController::ClientToArray($clientLectureRes["msg"]);
@@ -194,7 +194,7 @@ $app->get('/api/client/{id}', function (Request $request, Response $response, $a
     $response = $response->withStatus(200);
     $response = $response->withHeader("Content-Type", "application/json");
     $response->getBody()->write(json_encode(array("client" => $client)));
-    Add_CORS_Headers($response);
+    $response = Add_CORS_Headers($response);
     return $response;
 });
 
@@ -215,15 +215,15 @@ $app->get('/api/product/{id}', function (Request $request, Response $response, $
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => $productLectureRes["msg"])));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
     $product = ProductController::ProductToArray($productLectureRes["msg"]);
     
     $response = $response->withStatus(200);
     $response = $response->withHeader("Content-Type", "application/json");
-    $response->getBody()->write(json_encode(array("product" => $product)));
-    Add_CORS_Headers($response);
+    $response->getBody()->write(json_encode($product));
+    $response = Add_CORS_Headers($response);
     return $response; 
 });
 
@@ -242,15 +242,15 @@ $app->get('/api/product-list', function (Request $request, Response $response, $
         $response = $response->withStatus(400);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode(array("msg" => $productLectureRes["msg"])));
-        Add_CORS_Headers($response);
+        $response = Add_CORS_Headers($response);
         return $response;
     }
     $products = ProductController::ProductListToArray($productLectureRes["msg"]);
     
     $response = $response->withStatus(200);
     $response = $response->withHeader("Content-Type", "application/json");
-    $response->getBody()->write(json_encode(array("products" => $products)));
-    Add_CORS_Headers($response);
+    $response->getBody()->write(json_encode($products));
+    $response = Add_CORS_Headers($response);
     return $response; 
 });
 
