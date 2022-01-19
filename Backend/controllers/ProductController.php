@@ -41,7 +41,7 @@ class ProductController
         if (is_null($product))
             return array("status" => "error", "msg" => "Product not found.");
 
-        return array("status" => "ok", "msg" => $this->ProductToArray($product));
+        return array("status" => "ok", "msg" => $product);
     }
 
     public function ListProducts(array $pProductInfos)
@@ -49,10 +49,10 @@ class ProductController
         $productRepository = $this->mEntityManager->getRepository('Product');
         $products = $productRepository->findAll();
 
-        return array("status" => "ok", "msg" => $this->ProductListToArray($products));
+        return array("status" => "ok", "msg" => $products);
     }
 
-    public function ProductToArray(Product $pProduct)
+    public static function ProductToArray(Product $pProduct)
     {
         return array(
             "id" => $pProduct->getId(),
@@ -62,11 +62,11 @@ class ProductController
         );
     }
 
-    public function ProductListToArray(array $pProductList)
+    public static function ProductListToArray(array $pProductList)
     {
         $res = array();
         foreach ($pProductList as $product) {
-            $res[] = $this->ProductToArray($product);
+            $res[] = ProductController::ProductToArray($product);
         }
         return $res;
     }

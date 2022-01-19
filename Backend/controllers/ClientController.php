@@ -119,7 +119,7 @@ class ClientController
         return array("status" => "ok", "msg" => $clients);
     }
 
-    public function ClientToArray(Client $pClient)
+    public static function ClientToArray(Client $pClient)
     {
         return array(
             "name" => $pClient->getName(),
@@ -132,11 +132,11 @@ class ClientController
         );
     }
 
-    public function ClientListToArray(array $pClients)
+    public static function ClientListToArray(array $pClients)
     {
         $res = array();
         foreach ($pClients as $client) {
-            $res[] = $this->ClientToArray($client);
+            $res[] = ClientController::ClientToArray($client);
         }
         return $res;
     }
