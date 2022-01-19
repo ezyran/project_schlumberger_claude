@@ -2,8 +2,10 @@
 <nav>
     <ul>
         <a [routerLink]="['/']">Home</a>
-        <a [routerLink]="['/client/signup']">Inscription</a>
-        <a [routerLink]="['/client/signin']">Connexion</a>
         <a [routerLink]="['/product/list']">Catalogue</a>
+        <a *ngIf="mClientService.authentifiedAccount" [routerLink]="['/client/account']">Mon compte</a>
+        <a *ngIf="mClientService.authentifiedAccount" [routerLink]="['/client/cart']">Panier</a>
+        <a *ngIf="!mClientService.authentifiedAccount" [routerLink]="['/client/signup']">Inscription</a>
+        <a *ngIf="!mClientService.authentifiedAccount" [routerLink]="['/client/signin']">Connexion</a>
     </ul>
 </nav>

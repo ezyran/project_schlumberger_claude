@@ -1,25 +1,21 @@
 export class Client
 {   
-    username: string;
-    email: string;
     name: string;
     surname: string;
-    telephone: string;
-    zipcode: string;
-    country: string;
+    phoneNumber: string;
+    streetNumber: string;
+    streetName: string;
     city: string;
-    address: string;
+    zipcode: string;
 
     constructor()
     {
-        this.username = "";
-        this.email = "";
         this.name = "";
         this.surname = "";
-        this.telephone = "";
-        this.zipcode = "";
-        this.country = "";
+        this.phoneNumber = "";
+        this.streetNumber = "";
+        this.streetName = "";
         this.city = "";
-        this.address = "";
+        this.zipcode = "";           
     }
 }

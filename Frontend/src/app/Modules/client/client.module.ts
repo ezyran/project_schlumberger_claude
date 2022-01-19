@@ -6,6 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './Components/signup/signup.component';
 import { SigninComponent } from './Components/signin/signin.component';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { DetailComponent } from './Components/detail/detail.component';
+import { CartComponent } from './Components/cart/cart.component';
 
 const moduleRoutes: Routes = [
   {
@@ -18,6 +21,14 @@ const moduleRoutes: Routes = [
       {
         path: 'signin',
         component: SigninComponent
+      },
+      {
+        path: 'cart',
+        component: CartComponent
+      },
+      {
+        path: 'account',
+        component: DetailComponent
       }
     ]
   }
@@ -26,12 +37,15 @@ const moduleRoutes: Routes = [
 @NgModule({
   declarations: [
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    DetailComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forChild(moduleRoutes)
   ]
 })

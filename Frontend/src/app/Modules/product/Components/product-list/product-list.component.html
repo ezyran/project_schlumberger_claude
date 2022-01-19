@@ -1,1 +1,55 @@
-<p>product-list works!</p>
+<div class="card">
+    <div class="card-header">
+        <h1>Recherche de produits</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="pt-2 col text-center">
+                <label for="product-name">Nom du produit</label>
+            </div>
+            <div class="pt-2 col text-center">
+                <label for="minPrice">Prix minimum</label>
+            </div>
+            <div class="pt-2 col text-center">
+                <label for="maxPrice">Prix maximum</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pb-3 col text-center">
+                <input name="product-name" type="text" [formControl]="productName">
+            </div>
+            <div class="pb-3 col text-center">
+                <input name="minPrice" type="number" [formControl]="productMinPrice">
+            </div>
+            <div class="pb-3 col text-center center-align">
+                <input name="maxPrice" type="number" [formControl]="productMaxPrice">
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col text-center">
+                <button class="btn btn-primary" (click)="OnValidateButtonClick()">Rechercher</button>
+            </div>
+            <div class="col text-center">
+                <button class="btn btn-secondary" (click)="OnResetButtonClick()">Réinitialiser la saisie</button>
+            </div>
+        </div>
+    </div>
+    <table id="search-result" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix</th>
+                <th *ngIf="clientService.authentifiedAccount" scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of mProducts">
+                <th scope="row">{{ product.id }}</th>
+                <td><a [routerLink]="['/product/detail/' + product.id]">{{ product.name }}</a></td>
+                <td>{{ product.price }}€</td>
+                <td *ngIf="clientService.authentifiedAccount"><button class="btn btn-success btn-sm" (click)="AddProductToCart(product)">Add to cart</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

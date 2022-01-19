@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientModule } from '../../client.module';
+import { Account } from '../../Models/account';
 import { Client } from '../../Models/client';
+import { ClientService } from '../../Services/client.service';
 
 @Component({
   selector: 'client-signup',
@@ -11,48 +13,59 @@ import { Client } from '../../Models/client';
 })
 export class SignupComponent implements OnInit {
 
-  signUpForm : FormGroup;
+  signUpForm: FormGroup;
+  message?: string;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, private clientService: ClientService) {
     this.signUpForm = this.InitFormGroup();
   }
 
   ngOnInit(): void { }
 
-  public OnFormValidation() : void {
-    console.log("Validation du formulaire ...");
-    if (this.signUpForm.status === "VALID")
-      console.log(this.GetClientFromForm());
+  public OnFormValidation(): void {
+    if (this.signUpForm.status === "VALID") 
+    {
+      let account = this.GetAccountFromForm();
+      let client = this.GetClientFromForm();
+
+      this.clientService.SignUp(account, client).subscribe(
+        (res) => this.router.navigateByUrl('/client/signin'), 
+        (error) => { console.log(error.error.msg); }
+      );
+    }
   }
 
-  private InitFormGroup() : FormGroup {
+  private InitFormGroup(): FormGroup {
     return this.formBuilder.group({
-      username: ['', Validators.required, Validators.minLength(3), Validators.maxLength(20)],
+      email: ['', Validators.required],
       password: ['', Validators.required],
       passwordConf: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      telephone: ['', Validators.required],
-      zipcode: ['', Validators.required],
-      country: ['', Validators.required],      
+      phoneNumber: ['', Validators.required],
+      streetNumber: ['', Validators.required],
+      streetName: ['', Validators.required],
       city: ['', Validators.required],
-      address: ['', Validators.required]
+      zipcode: ['', Validators.required],
     });
   }
 
-  private GetClientFromForm() : Client
-  {
+  private GetAccountFromForm(): Account {
+    let account: Account = new Account();
+    account.email = this.signUpForm.value["email"];
+    account.passwordHash = this.signUpForm.value["password"];
+    return account;
+  }
+
+  private GetClientFromForm(): Client {
     let client: Client = new Client();
-    client.username = this.signUpForm.value["username"];
-    client.email = this.signUpForm.value["email"];
     client.name = this.signUpForm.value["name"];
     client.surname = this.signUpForm.value["surname"];
-    client.telephone = this.signUpForm.value["telephone"];
-    client.zipcode = this.signUpForm.value["zipcode"];
-    client.country = this.signUpForm.value["country"];
+    client.phoneNumber = this.signUpForm.value["phoneNumber"];
+    client.streetNumber = this.signUpForm.value["streetNumber"];
+    client.streetName = this.signUpForm.value["streetName"];
     client.city = this.signUpForm.value["city"];
-    client.address = this.signUpForm.value["address"];
+    client.zipcode = this.signUpForm.value["zipcode"];
     return client;
   }
 

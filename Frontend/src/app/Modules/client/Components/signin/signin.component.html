@@ -1,1 +1,14 @@
-<p>signin works!</p>
+<form [formGroup]="signInForm">
+
+    <div>
+        <label class="form-label">Adresse e-mail</label>
+        <input type="email" formControlName="email">
+    </div>
+
+    <div>
+        <label class="form-label">Mot de passe</label>
+        <input type="text" formControlName="password">
+    </div>
+
+    <button class="btn btn-primary" (click)="OnFormValidation()">Valider</button>
+</form>

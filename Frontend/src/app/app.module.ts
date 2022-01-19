@@ -1,13 +1,16 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { NgxsModule } from '@ngxs/store';
 import { AppRoutingModule } from './app-routing.module';
-
 
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
+import { APIInterceptor } from './Interceptors/api.interceptor';
+import { CartState } from './Modules/client/Cart/States/cart-state';
 
 const appRoutes: Routes = [
   {
@@ -33,9 +36,17 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    NgxsModule.forRoot([CartState])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: APIInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

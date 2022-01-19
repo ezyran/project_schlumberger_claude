@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 // Components
 import { ProductDetailComponent } from './Components/product-detail/product-detail.component';
 import { ProductListComponent } from './Components/product-list/product-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const moduleRoutes: Routes = [
   {
@@ -29,6 +31,8 @@ const moduleRoutes: Routes = [
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forChild(moduleRoutes)
   ]
 })
