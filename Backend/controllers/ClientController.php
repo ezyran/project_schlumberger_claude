@@ -119,4 +119,26 @@ class ClientController
         return array("status" => "ok", "msg" => $clients);
     }
 
+    public function ClientToArray(Client $pClient)
+    {
+        return array(
+            "name" => $pClient->getName(),
+            "surname" => $pClient->getSurname(),
+            "phoneNumber" => $pClient->getPhonenumber(),
+            "streetNumber" => $pClient->getStreetnumber(),
+            "streetName" => $pClient->getStreetName(),
+            "city" => $pClient->getCity(),
+            "zipcode" => $pClient->getZipcode()
+        );
+    }
+
+    public function ClientListToArray(array $pClients)
+    {
+        $res = array();
+        foreach ($pClients as $client) {
+            $res[] = $this->ClientToArray($client);
+        }
+        return $res;
+    }
+
 }

@@ -52,7 +52,7 @@ class ProductController
         return array("status" => "ok", "msg" => $this->ProductListToArray($products));
     }
 
-    private function ProductToArray(Product $pProduct)
+    public function ProductToArray(Product $pProduct)
     {
         return array(
             "id" => $pProduct->getId(),
@@ -62,7 +62,7 @@ class ProductController
         );
     }
 
-    private function ProductListToArray(array $pProductList)
+    public function ProductListToArray(array $pProductList)
     {
         $res = array();
         foreach ($pProductList as $product) {

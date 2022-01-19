@@ -79,4 +79,12 @@ class AccountController
 
         return array("status" => "ok", "msg" => $account);
     }
+
+    public function AccountToArray(Account $pAccount)
+    {
+        return array(
+            "id" => $pAccount->getId(),
+            "email" => $pAccount->getEmail()
+        );
+    }
 }
