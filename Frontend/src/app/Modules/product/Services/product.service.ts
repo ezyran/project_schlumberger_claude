@@ -8,8 +8,8 @@ import { Product } from '../Models/product';
 })
 export class ProductService {
 
-  API_GetProduct_Url: string = "http://localhost:8080/api/product/" as const;
-  API_ListProducts_Url: string = "http://localhost:8080/api/product-list" as const;
+  API_GetProduct_Url: string = "https://projet-csc-backend.herokuapp.com/api/product/" as const;
+  API_ListProducts_Url: string = "https://projet-csc-backend.herokuapp.com/api/product-list" as const;
 
   constructor(private httpClient: HttpClient) { }
 

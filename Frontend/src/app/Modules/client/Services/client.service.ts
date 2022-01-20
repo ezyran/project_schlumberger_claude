@@ -9,9 +9,9 @@ import { Client } from '../Models/client';
 })
 export class ClientService {
 
-  API_SignIn_Url: string = "http://localhost:8080/api/signin" as const;
-  API_SignUp_Url: string = "http://localhost:8080/api/signup" as const;
-  API_GetClient_Url : string = "http://localhost:8080/api/client/" as const;
+  API_SignIn_Url: string = "https://projet-csc-backend.herokuapp.com/api/signin" as const;
+  API_SignUp_Url: string = "https://projet-csc-backend.herokuapp.com/api/signup" as const;
+  API_GetClient_Url : string = "https://projet-csc-backend.herokuapp.com/api/client/" as const;
 
   public authentifiedAccount?: Account;
 
