@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/Modules/product/Models/product';
@@ -12,7 +13,7 @@ import { CartState } from '../../Cart/States/cart-state';
 })
 export class CartComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private router: Router) { }
 
   RemoveProductFromCart(product: Product): void {
     this.store.dispatch(new RemoveProduct(product));
@@ -25,6 +26,7 @@ export class CartComponent implements OnInit {
   OrderCart(): void {
     this.store.dispatch(new ClearProducts());
     alert("Paiement effectué :\nVotre colis sera livré cette nuit entre 23h et 4h.\nMerci d'être présent pour récéption du colis.");
+    this.router.navigateByUrl('/');
   }
 
   @Select(CartState.getProducts) lstProductsInCart!: Observable<Product[]>
