@@ -17,6 +17,7 @@ export class CartState {
     }
     @Selector()
     static getProducts(state: CartStateModel) {
+        console.log("GetProducts = " + state.products);
         return state.products;
     }
 
@@ -28,6 +29,7 @@ export class CartState {
         const state = getState();
         let tmpProducts = state.products;
         tmpProducts.push(payload);
+        console.log("AddProduct = " + tmpProducts);
         patchState({
             products: tmpProducts
         });

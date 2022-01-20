@@ -22,7 +22,13 @@ export class CartComponent implements OnInit {
     this.store.dispatch(new ClearProducts());
   }
 
-  @Select(CartState.getProducts) lstProductsInCart?: Observable<Product[]>
+  OrderCart(): void {
+    this.store.dispatch(new ClearProducts());
+    alert("Paiement effectué :\nVotre colis sera livré cette nuit entre 23h et 4h.\nMerci d'être présent pour récéption du colis.");
+  }
+
+  @Select(CartState.getProducts) lstProductsInCart!: Observable<Product[]>
+  @Select(CartState.getNbProducts) nbProducts!: Observable<Number>
   ngOnInit(): void {
   }
 

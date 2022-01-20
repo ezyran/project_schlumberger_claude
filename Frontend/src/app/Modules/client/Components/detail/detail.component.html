@@ -1,12 +1,14 @@
-<div class="card">
-    <div class="card-header">
-        <h1>Mon compte</h1>
-    </div>
-    <div class="card-body">
-        <h3>{{ mClient.name }}</h3>
-        <h3>{{ mClient.surname }}</h3>
-        <h3>{{ mClient.phoneNumber }}</h3>
-        <h3>{{ mClient.streetNumber }} {{ mClient.streetName }}</h3>
-        <h3>{{ mClient.zipcode }} {{ mClient.city }}</h3>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Mon compte</h1>
+        </div>
+        <div class="card-body">
+            <h3> Nom : {{ mClient.name }}</h3>
+            <h3> Prénom : {{ mClient.surname }}</h3>
+            <h3> Téléphone : {{ mClient.phoneNumber }}</h3>
+            <h3> Adresse : {{ mClient.streetNumber }} {{ mClient.streetName }}</h3>
+            <h3> Ville : {{ mClient.zipcode }} {{ mClient.city }}</h3>
+        </div>
     </div>
 </div>

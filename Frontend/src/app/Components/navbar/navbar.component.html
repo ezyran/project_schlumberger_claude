@@ -1,11 +1,20 @@
-<h1>App</h1>
-<nav>
-    <ul>
-        <a [routerLink]="['/']">Home</a>
-        <a [routerLink]="['/product/list']">Catalogue</a>
-        <a *ngIf="mClientService.authentifiedAccount" [routerLink]="['/client/account']">Mon compte</a>
-        <a *ngIf="mClientService.authentifiedAccount" [routerLink]="['/client/cart']">Panier</a>
-        <a *ngIf="!mClientService.authentifiedAccount" [routerLink]="['/client/signup']">Inscription</a>
-        <a *ngIf="!mClientService.authentifiedAccount" [routerLink]="['/client/signin']">Connexion</a>
-    </ul>
-</nav>
+
+<div class="container">
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <h1 class="d-flex align-items-center mb-2 mr-4 mb-lg-0 text-white text-decoration-none">Boutique -</h1>
+                <nav>
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <a class="nav-link px-2 text-white" [routerLink]="['/']">Home</a>
+                        <a class="nav-link px-2 text-white" [routerLink]="['/product/list']">Catalogue</a>
+                        <a class="nav-link px-2 text-white" *ngIf="mClientService.authentifiedAccount" [routerLink]="['/client/account']">Mon compte</a>
+                        <a class="nav-link px-2 text-white" *ngIf="mClientService.authentifiedAccount" [routerLink]="['/client/cart']">Panier</a>
+                        <a class="nav-link px-2 text-white" *ngIf="!mClientService.authentifiedAccount" [routerLink]="['/client/signup']">Inscription</a>
+                        <a class="nav-link px-2 text-white" *ngIf="!mClientService.authentifiedAccount" [routerLink]="['/client/signin']">Connexion</a>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+</div>

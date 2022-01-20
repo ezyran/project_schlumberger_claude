@@ -1,15 +1,21 @@
-<div class="card">
-    <div class="card-header">
-        <h1>Mon panier</h1>
-    </div>
-    <div class="card-body">
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let product of lstProductsInCart | async">
-                {{ product.id }} : {{ product.name }}, {{ product.price }}€ <button class="btn btn-danger btn-sm"
-                    (click)="RemoveProductFromCart(product)">Enlever</button>
-            </li>
-        </ul>
-        <button class="btn btn-success btn-lg">Commander</button>
-        <button class="btn btn-danger btn-lg">Vider le panier</button>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Mon panier</h1>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let product of lstProductsInCart | async">
+                    {{ product.id }} : {{ product.name }}, {{ product.price }}€ <button class="btn btn-danger btn-sm"
+                        (click)="RemoveProductFromCart(product)">Enlever</button>
+                </li>
+            </ul>
+            <div *ngIf="lstProductsInCart | async; let list">
+                <div *ngIf="list.length > 0" class="btn-group">
+                    <button class="btn btn-success btn-lg" (click)="OrderCart()">Commander</button>
+                    <button class="btn btn-danger btn-lg" (click)="ClearCart()">Vider le panier</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

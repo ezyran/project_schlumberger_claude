@@ -1,2 +1,14 @@
-<h1>{{ mProduct.name }}</h1>
-<p>product-detail works!</p>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>{{ mProduct.name }}</h1>
+        </div>
+        <div class="card-body">
+            <p>Id : {{ mProduct.id }}</p>
+            <p>Nom : {{ mProduct.name }}</p>
+            <p>Prix : {{ mProduct.price }}€</p>
+            <button *ngIf="clientService.authentifiedAccount" class="btn btn-success" (click)="AddProductToCart()">Ajouter au panier</button>
+            <button class="btn btn-danger" [routerLink]="['/product/list']">Retourner au catalogue</button>
+        </div>
+    </div>
+</div>
